@@ -1,0 +1,32 @@
+{
+  "name": "crypto-app",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build-linux": "electron-packager ./src --app-version 0.0.1 --platform linux --icon ./assets/android-icon-192x192.png --out ./dist --overwrite",
+    "build-rpm": "electron-installer-redhat --src dist/crypto-app-linux-x64/ --dest dist/installers/ --arch x86_64"
+  },
+  "keywords": [],
+  "author": "andy",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "7.1.9",
+    "electron-installer-redhat": "^2.0.0",
+    "electron-packager": "^14.2.0"
+  },
+
+  "build": {
+    "files": [
+      "build/*",
+      "build/**/*"
+      ]
+    ,
+    "linux": {
+      "publish": ["github"]
+    }
+  },
+  "release": "build"
+
+}
