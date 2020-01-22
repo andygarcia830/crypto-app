@@ -7,7 +7,8 @@
     "start": "electron .",
     "build-linux": "electron-packager ./src --app-version 0.0.1 --platform linux --icon ./assets/android-icon-192x192.png --out ./dist --overwrite",
     "build-rpm": "electron-installer-redhat --src dist/crypto-app-linux-x64/ --dest dist/installers/ --arch x86_64",
-    "release":"env $(cat .env | xargs) electron-builder --win -p always"
+    "release-bak":"env $(cat .env | xargs) electron-builder --win -p always",
+    "release":"electron-builder --win -p always"
   },
   "keywords": [],
   "author": "andy",
