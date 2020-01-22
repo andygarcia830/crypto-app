@@ -1,2 +1,1 @@
-# electronlab
 # crypto-app

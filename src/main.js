@@ -4,6 +4,21 @@ const { app, BrowserWindow } = require('electron')
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
+
+import { autoUpdater } from "electron-updater"
+
+export default class AppUpdater {
+  constructor() {
+    const log = require("electron-log")
+    log.transports.file.level = "debug"
+    autoUpdater.logger = log
+    autoUpdater.checkForUpdatesAndNotify()
+  }
+}
+
+autoUpdater.channel = "beta"
+
+
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({

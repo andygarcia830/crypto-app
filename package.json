@@ -1,32 +1,39 @@
 {
   "name": "crypto-app",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha",
   "description": "test",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron .",
     "build-linux": "electron-packager ./src --app-version 0.0.1 --platform linux --icon ./assets/android-icon-192x192.png --out ./dist --overwrite",
-    "build-rpm": "electron-installer-redhat --src dist/crypto-app-linux-x64/ --dest dist/installers/ --arch x86_64"
+    "build-rpm": "electron-installer-redhat --src dist/crypto-app-linux-x64/ --dest dist/installers/ --arch x86_64",
+    "release":"env $(cat .env | xargs) electron-builder --win -p always"
   },
   "keywords": [],
   "author": "andy",
   "license": "ISC",
   "devDependencies": {
     "electron": "7.1.9",
+    "electron-builder": "^22.2.0",
     "electron-installer-redhat": "^2.0.0",
-    "electron-packager": "^14.2.0"
+    "electron-packager": "^14.2.0",
+    "electron-updater": "^4.2.0"
   },
-
   "build": {
+    "appId": "com.xurpas.crypto-app",
+    "generateUpdatesFilesForAllChannels": true,
+    "detectUpdateChannel": true,
     "files": [
-      "build/*",
-      "build/**/*"
-      ]
-    ,
-    "linux": {
-      "publish": ["github"]
+      "src/*",
+      "src/**/*"
+    ],
+   "publish": { 
+      "provider": "s3",
+      "endpoint": "https://s3.ap-southeast-1.amazonaws.com",
+      "bucket": "com.xurpas.electron.builder.test",
+      "region": "ap-southeast-1"
+     
     }
   },
   "release": "build"
-
 }
